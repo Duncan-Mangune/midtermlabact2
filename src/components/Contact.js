@@ -10,7 +10,7 @@ const Contact = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    navigate('/success', { state: { name, email, message } });
+    navigate('/success', { state: { formData: { name, email, message } } });
   };
 
   return (

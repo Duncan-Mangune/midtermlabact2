@@ -1,21 +1,25 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 
-function SubmissionSuccess() {
+const SubmissionSuccess = () => {
   const location = useLocation();
-  const { name, email, message } = location.state.formData;
+  const { formData } = location.state || {}; // Use optional chaining to avoid errors
+
+  // Check if formData is undefined
+  if (!formData) {
+    return <h1>No data submitted.</h1>; // Provide a fallback UI
+  }
+
+  const { name, email, message } = formData;
 
   return (
     <div>
-      <h1>Thank you, {name}!</h1>
-      <p>Your message has been sent successfully.</p>
-      <h3>Submitted Details:</h3>
-      <ul>
-        <li><strong>Email:</strong> {email}</li>
-        <li><strong>Message:</strong> {message}</li>
-      </ul>
+      <h1>Submission Successful!</h1>
+      <p>Name: {name}</p>
+      <p>Email: {email}</p>
+      <p>Message: {message}</p>
     </div>
   );
-}
+};
 
 export default SubmissionSuccess;
